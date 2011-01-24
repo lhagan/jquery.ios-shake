@@ -18,7 +18,7 @@ pre.. <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/j
     });
 </script>
 
-p. And, if you want to customize a bit more, here is an example with all the options. You can raise @violence@ decrease sensitivity or decrease the @debounce@ if you need to detect shakes faster than one per second. (I'd leave the other options out unless you have some really specific application that's not working with the default settings.) The @debug@ and @supported@ options allow you to pass @div@ IDs to ios-shake so that it can place some specific content on your page. See example.html for details.
+p. And, if you want to customize a bit more, here's an example with all the options. You can raise @violence@ to decrease sensitivity or decrease the @debounce@ if you need to detect shakes faster than one per second. (I'd leave the other options out unless you have some really specific application that's not working with the default settings.) The @debug@ and @supported@ options allow you to pass @div@ IDs to ios-shake so that it can place some specific content on your page. See example.html for details.
 
 pre.. $.shake({
     debug: "#debugdiv",             // debug div id
