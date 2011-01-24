@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Shake</title>
+</head>
+
+<body>
+    <div id="content">
+        <h1>iOS Shake</h1>
+    
+        <div id="supported">
+        </div>
+    
+        <div id="output">
+        </div>
+    
+        <div id="debug">
+        </div>
+    </div>
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.ios-shake.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            function onShake() {
+                $('#output').append('shake<br/>');
+            }
+
+            $.shake({
+                debug: "#debug",
+                supported: "#supported",
+                callback: function() {
+                    onShake();
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
