@@ -97,8 +97,11 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 // detect shake event (several shakes)
                 curtime = new Date();
                 var timedelta = curtime.getTime() - prevtime.getTime();
-                $('#console').html(timedelta);
-
+                
+                if (opts.debug !== "") {
+                    $('#console').html(timedelta);
+                }
+                
                 if (timeout) {
                     if (timedelta >= opts.debounce) {
                         timeout = false;
@@ -110,7 +113,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
                 if (shakeaccum >= opts.shakethreshold && timeout === false) {
                     shakecount += 1;
-                    $("#shake").html(shakecount);
+                    if (opts.debug !== "") {
+                        $("#shake").html(shakecount);
+                    }
                     prevtime = curtime;
                     timeout = true;
                     opts.callback.call();
