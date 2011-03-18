@@ -29,10 +29,9 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 (function($) {
-    jQuery.shake = function(options) {
+    $.shake = function(options) {
         // Merge passed options with defaults
-        var opts = jQuery.extend({},
-        jQuery.shake.defaults, options);
+        var opts = $.extend({}, $.shake.defaults, options);
 
         // insert debug content
         if (opts.debug !== "") {
@@ -40,7 +39,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             debug.append('x: <span id="x">0</span><br>');
             debug.append('y: <span id="y">0</span><br>');
             debug.append('z: <span id="z">0</span><br><br>');
-
+            
             debug.append('shake: <span id="shake">0</span><br>');
             debug.append('shakeaccum: <span id="shakeaccum"></span><br>');
             debug.append('debug: <span id="console"></span><br>');
@@ -68,12 +67,12 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 $(opts.supported).html("Your browser does not support Device Orientation and Motion API. Try it on an iPhone, iPod or iPad with iOS 4.2+.");
             }
         } else {
-            window.ondevicemotion = function(event) {
+            window.addEventListener('devicemotion', function(event){
                 // get acceleration values
                 var acc = event.accelerationIncludingGravity;
                 ax = acc.x;
                 ay = acc.y;
-                az = acc.y;
+                az = acc.z;
 
                 // high pass-filter to remove gravity
                 // TODO detect and use gyro (no gravity) on supported devices
@@ -97,11 +96,8 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 // detect shake event (several shakes)
                 curtime = new Date();
                 var timedelta = curtime.getTime() - prevtime.getTime();
-                
-                if (opts.debug !== "") {
-                    $('#console').html(timedelta);
-                }
-                
+                //$('#console').html(timedelta);
+
                 if (timeout) {
                     if (timedelta >= opts.debounce) {
                         timeout = false;
@@ -113,15 +109,14 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
                 if (shakeaccum >= opts.shakethreshold && timeout === false) {
                     shakecount += 1;
-                    if (opts.debug !== "") {
-                        $("#shake").html(shakecount);
-                    }
+                    //$("#shake").html(shakecount);
                     prevtime = curtime;
                     timeout = true;
-                    opts.callback.call();
+                    opts.callback.call( this, shakecount);
                 }
                 beenhere = true;
-            };
+            }, false);
+            
         }
         if (opts.debug !== "") {
             setInterval(function() {
@@ -129,15 +124,16 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
                 $('#x').html(Math.abs(ax - 2 * axa).toFixed(1));
                 $('#y').html(Math.abs(ay - 2 * aya).toFixed(1));
                 $('#z').html(Math.abs(az - 2 * aza).toFixed(1));
+                
                 $('#shakeaccum').html(shakeaccum);
             },
-            10);
+            100);
         }
     };
 })(jQuery);
 
 // plugin default options
-jQuery.shake.defaults = {
+$.shake.defaults = {
     // debug div id
     debug: "",
     
@@ -159,4 +155,3 @@ jQuery.shake.defaults = {
     // anonymous callback function
     callback: function() {}
 };
-

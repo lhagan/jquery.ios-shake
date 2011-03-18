@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Shake</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Shake - jQuery Shake plugin</title>
+
 </head>
 
 <body>
@@ -20,21 +24,21 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="jquery.ios-shake.js"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-            function onShake() {
-                $('#output').append('shake<br/>');
+            
+            function onShake(shakecount) {
+                $('#output').html('shakecount: <strong>'+ shakecount  +'<strong> <br/>');
             }
 
             $.shake({
                 debug: "#debug",
                 supported: "#supported",
-                callback: function() {
-                    onShake();
-                }
+                callback: function(shakecount) { onShake(shakecount); }
             });
+            
         });
     </script>
     
