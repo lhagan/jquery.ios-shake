@@ -31,7 +31,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 (function($) {
     $.shake = function(options) {
         // Merge passed options with defaults
-        var opts = $.extend({}, $.shake.defaults, options);
+        var opts = $.extend($.shake.defaults, options);
 
         // insert debug content
         if (opts.debug !== "") {
@@ -130,7 +130,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             100);
         }
     };
-})(jQuery);
+})(window.jQuery || window.Zepto);
 
 // plugin default options
 $.shake.defaults = {
