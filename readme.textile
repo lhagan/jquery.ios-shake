@@ -1,5 +1,7 @@
 h1. jQuery iOS Shake Detector
 
+_Note: this library isn't under active development. You may want to check out "this fork":https://github.com/LinusU/deviceshake.js from Linus Unnebäck instead._
+
 A jQuery plugin that detects a 'shake' event using Safari's accelerometer support in iOS 4.2+.
 
 jquery.ios-shake is a simple-to-use jQuery plugin that monitors the iPhone/iPad's accelerometer in order to detect the user "shaking" the device. The goal of this script is to provide robust shake detection and minimize the chances of triggering spurious shake events.
